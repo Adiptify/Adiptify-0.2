@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-navy: #2D3C59;
+  --color-olive: #94A378;
+  --color-gold: #E5BA41;
+  --color-terracotta: #D1855C;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 overflow-x-hidden;
+  font-family: 'Inter', 'Outfit', sans-serif;
+}
+
+.mountain-graph-path {
+  transition: d 0.5s ease-in-out;
+}
+
+/* Custom Scrollbar for Chat */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-adiptify-navy/20 rounded-full;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-adiptify-navy/40;
+}
