@@ -1,17 +1,55 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-adiptify-navy: #2D3C59;
+  --color-adiptify-olive: #94A378;
+  --color-adiptify-gold: #E5BA41;
+  --color-adiptify-terracotta: #D1855C;
+  --font-sans: 'Inter', 'Outfit', sans-serif;
+}
+
+/* ─── Light mode defaults ─── */
 :root {
   --color-navy: #2D3C59;
   --color-olive: #94A378;
   --color-gold: #E5BA41;
   --color-terracotta: #D1855C;
+  --surface-primary: #f8fafc;
+  --surface-card: #ffffff;
+  --surface-hover: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border-default: #e2e8f0;
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --glow-color: rgba(229, 186, 65, 0.15);
+}
+
+/* ─── Dark mode overrides ─── */
+.dark {
+  --color-navy: #1E2A3F;
+  --color-olive: #A8B88C;
+  --color-gold: #F0CA50;
+  --color-terracotta: #E09570;
+  --surface-primary: #0f172a;
+  --surface-card: #1e293b;
+  --surface-hover: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --border-default: #334155;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --glow-color: rgba(240, 202, 80, 0.2);
 }
 
 body {
-  @apply bg-slate-50 text-slate-900 overflow-x-hidden;
-  font-family: 'Inter', 'Outfit', sans-serif;
+  background-color: var(--surface-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .mountain-graph-path {
@@ -24,13 +62,73 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  @apply bg-slate-100;
+  background-color: #f1f5f9;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #1e293b;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  @apply bg-adiptify-navy/20 rounded-full;
+  background-color: rgba(45, 60, 89, 0.2);
+  border-radius: 9999px;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.3);
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  @apply bg-adiptify-navy/40;
+  background-color: rgba(45, 60, 89, 0.4);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(148, 163, 184, 0.5);
+}
+
+/* Fade-in animation for page transitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.35s ease-out;
+}
+
+/* Pulse glow for active cards */
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(229, 186, 65, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 12px 2px var(--glow-color, rgba(229, 186, 65, 0.15));
+  }
+}
+
+.animate-pulseGlow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Theme transition for smooth switching */
+*,
+*::before,
+*::after {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+/* Exclude elements that shouldn't transition (animations, transforms) */
+.react-flow *,
+.graph-container * {
+  transition: none !important;
 }

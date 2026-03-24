@@ -13,20 +13,17 @@ export default function ProctoringShield() {
                 setIsFocused(false);
                 setViolations(prev => {
                     const newCount = prev + 1;
-                    // In a real app, send strict violation log to Backend/Instructor Console here
                     console.warn(`[Proctoring] Focus lost. Violation log recorded. Count: ${newCount}`);
                     return newCount;
                 });
                 setShowWarning(true);
             } else {
                 setIsFocused(true);
-                // Auto-hide warning after 5 seconds of return
                 setTimeout(() => setShowWarning(false), 5000);
             }
         };
 
         const handleBlur = () => {
-            // Fallback for window blur events if visibilityState isn't enough
             if (isFocused) handleVisibilityChange();
         };
 
@@ -44,8 +41,8 @@ export default function ProctoringShield() {
             {/* Persistent Status Indicator */}
             <div className="fixed top-4 right-4 z-40">
                 <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full shadow-sm border backdrop-blur-md text-xs font-bold uppercase tracking-wider transition-colors ${violations > 0
-                        ? 'bg-adiptify-gold/10 border-adiptify-gold/20 text-adiptify-gold'
-                        : 'bg-adiptify-olive/10 border-adiptify-olive/20 text-adiptify-olive'
+                    ? 'bg-adiptify-gold/10 border-adiptify-gold/20 text-adiptify-gold'
+                    : 'bg-adiptify-olive/10 border-adiptify-olive/20 text-adiptify-olive'
                     }`}>
                     {violations > 0 ? (
                         <>
@@ -72,10 +69,10 @@ export default function ProctoringShield() {
                             }`}
                     >
                         {!isFocused ? (
-                            <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl text-center">
+                            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 max-w-md w-full shadow-2xl text-center">
                                 <ShieldAlert size={48} className="text-adiptify-terracotta mx-auto mb-4" />
-                                <h2 className="text-2xl font-bold text-adiptify-navy mb-2">Focus Lost</h2>
-                                <p className="text-slate-600 mb-6">
+                                <h2 className="text-2xl font-bold text-adiptify-navy dark:text-white mb-2">Focus Lost</h2>
+                                <p className="text-slate-600 dark:text-slate-300 mb-6">
                                     You have navigated away from the learning session. This event has been logged to the proctoring engine. Return to the tab to resume.
                                 </p>
                                 <div className="animate-pulse text-sm font-bold text-adiptify-terracotta uppercase tracking-wider">
@@ -83,14 +80,14 @@ export default function ProctoringShield() {
                                 </div>
                             </div>
                         ) : (
-                            <div className="absolute top-16 right-4 bg-white border border-adiptify-gold rounded-xl p-4 shadow-xl max-w-xs pointer-events-auto">
-                                <p className="text-sm font-medium text-slate-800">
+                            <div className="absolute top-16 right-4 bg-white dark:bg-slate-800 border border-adiptify-gold rounded-xl p-4 shadow-xl max-w-xs pointer-events-auto">
+                                <p className="text-sm font-medium text-slate-800 dark:text-slate-200">
                                     <span className="font-bold text-adiptify-gold block mb-1">Warning Recorded</span>
                                     Please keep the Adiptify dashboard active during assessments.
                                 </p>
                                 <button
                                     onClick={() => setShowWarning(false)}
-                                    className="mt-3 text-xs w-full py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg transition-colors font-semibold"
+                                    className="mt-3 text-xs w-full py-1.5 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300 rounded-lg transition-colors font-semibold"
                                 >
                                     Dismiss
                                 </button>

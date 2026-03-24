@@ -10,25 +10,25 @@ export default function SubjectCard({ subject, onClick, isActive }) {
             className={`
         relative overflow-hidden rounded-2xl p-6 cursor-pointer transition-all duration-300
         ${isActive
-                    ? 'bg-white shadow-xl ring-2 ring-adiptify-navy scale-[1.02]'
-                    : 'bg-white shadow-md hover:shadow-lg hover:-translate-y-1'
+                    ? 'bg-white dark:bg-slate-800 shadow-xl ring-2 ring-adiptify-navy dark:ring-adiptify-gold scale-[1.02]'
+                    : 'bg-white dark:bg-slate-800 shadow-md hover:shadow-lg hover:-translate-y-1'
                 }
       `}
         >
             <div className="flex justify-between items-start mb-6">
                 <div>
-                    <h3 className={`text-xl font-bold tracking-tight text-adiptify-navy`}>
+                    <h3 className="text-xl font-bold tracking-tight text-adiptify-navy dark:text-white">
                         {subject.title}
                     </h3>
-                    <p className="text-sm text-slate-500 mt-1">Adaptive mastery score</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Adaptive mastery score</p>
                 </div>
-                <div className={`p-3 rounded-xl bg-slate-50 border ${isActive ? 'border-adiptify-navy/20' : 'border-slate-100'}`}>
-                    <span className="text-2xl font-black text-adiptify-navy">{subject.mastery}%</span>
+                <div className={`p-3 rounded-xl bg-slate-50 dark:bg-slate-700 border ${isActive ? 'border-adiptify-navy/20 dark:border-adiptify-gold/20' : 'border-slate-100 dark:border-slate-600'}`}>
+                    <span className="text-2xl font-black text-adiptify-navy dark:text-adiptify-gold">{subject.mastery}%</span>
                 </div>
             </div>
 
             {/* SVG Mountain Graph Mockup */}
-            <div className="h-24 w-full bg-slate-50/50 rounded-xl mb-6 relative overflow-hidden border border-slate-100 flex items-end">
+            <div className="h-24 w-full bg-slate-50/50 dark:bg-slate-700/50 rounded-xl mb-6 relative overflow-hidden border border-slate-100 dark:border-slate-600 flex items-end">
                 <svg
                     viewBox="0 0 100 40"
                     className="w-full h-full preserve-3d"
@@ -62,7 +62,7 @@ export default function SubjectCard({ subject, onClick, isActive }) {
 
             <div className="flex justify-between items-end">
                 <div>
-                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Weekly Trend</p>
+                    <p className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Weekly Trend</p>
                     <div className={`flex items-center gap-1 font-semibold ${isPositive ? 'text-adiptify-olive' : 'text-adiptify-terracotta'}`}>
                         {isPositive ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
                         <span>{subject.trend}</span>
@@ -71,7 +71,7 @@ export default function SubjectCard({ subject, onClick, isActive }) {
 
                 <div className={`
           flex items-center gap-1 text-sm font-medium transition-colors
-          ${isActive ? 'text-adiptify-navy' : 'text-slate-400 group-hover:text-adiptify-navy'}
+          ${isActive ? 'text-adiptify-navy dark:text-adiptify-gold' : 'text-slate-400 group-hover:text-adiptify-navy dark:group-hover:text-adiptify-gold'}
         `}>
                     <span>Deep Dive</span>
                     <ChevronRight size={16} className={`transition-transform ${isActive ? 'translate-x-1' : ''}`} />
